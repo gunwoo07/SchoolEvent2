@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키보드 속도</title>
+</head>
+<body>
+    
+    <div id="counter">0</div>
+    <div id="timer">10</div>
+</body>
+<script>
+    var start = false;
+    var end = false;
+    var count = 0;
+    function count_click() {
+        if (start == false && end == false) {
+            setTimeout(() => {
+                timer();
+            }, 0);
+            start = true
+        }
+        if (start == true && end == false) {
+            count++;
+            document.getElementById("counter").innerHTML = count;
+        }
+    }
+
+    function timer() {
+        var time = 9;
+
+        var x = setInterval(function() {
+
+            document.getElementById("timer").innerHTML = time;
+            time--;
+            console.log(time);
+            if (time < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "0";
+                end = true;
+            }
+        }, 1000)
+    }
+</script>
+</html>
