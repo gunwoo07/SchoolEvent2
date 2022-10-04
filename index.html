@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>3대 측정</title>
 </head>
 <body>
-    <div class="btn" onclick="click_speed()">
-        클릭 속도
+    <div class="header">
+        피지컬<br>
+        측정기
+    </div>
+    <div class="container">
+        <div class="btn1" onclick="click_speed()">
+            클릭 속도
+        </div>
+        <div class="btn2" onclick="aim()">
+            에임 정확도
+        </div>
     </div>
 
-    <div class="btn" onclick="aim()">
-        에임 정확도
-    </div>
 </body>
 <script>
     function click_speed() {
