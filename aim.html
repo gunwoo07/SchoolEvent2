@@ -8,25 +8,58 @@
     <title>에임 정확도 측정</title>
 </head>
 <body>
-    <div class="main">
-        <div class="target" id="target" onclick="count_click()">
+    <div class="header">
+        에임 측정
+    </div>
+    <div class="container">
+        <div class="main" id="main">
+            <div class="target" id="target" onclick="count_click()">
+            </div>
         </div>
-    </div>
-    <div class="counter" id="counter" onclick="count_click()">
-        0
-    </div>
-    <div id="timer">20</div>
-    <div onclick="location.href='index.html'">
-        go home
-    </div>
-    <div onclick="location.href='aim.html'">
-        restart
+        <div class="counter" id="counter">
+            0회
+        </div>
+        <div class="timer" id="timer">20초</div>
+        <div class="btn1" onclick="location.href='index.html'">
+            돌아가기
+        </div>
+        <div class="btn2" onclick="location.href='aim.html'">
+            다시하기
+        </div>
     </div>
 </body>
 <script>
     var start = false;
     var end = false;
     var count = 0;
+    var randomRange = 450;
+    // 사이즈 조절 함수
+    /*
+        표준: 500px * 500px에 50px
+        양옆 50px 이상 빈 공간 필요
+    */
+    var ScreenWidth = window.innerWidth;
+    const mainDiv = document.getElementById("main");
+    const targetDiv = document.getElementById("target");
+    changeSize()
+    window.addEventListener("resize", changeSize);
+
+    function changeSize() {
+        var screenWidth = window.innerWidth;
+        var mainWidth = 500;
+        var targetWidth = 100;
+        if (screenWidth < 600) {
+            mainWidth = screenWidth - 100;
+            targetWidth = 100 * mainWidth / 500;
+        }
+        mainDiv.style.width = mainWidth + "px";
+        mainDiv.style.height = mainWidth + "px";
+        targetDiv.style.width = targetWidth + "px";
+        targetDiv.style.height = targetWidth + "px";
+
+        randomRange = (mainWidth - targetWidth);
+    }
+    // 클릭 이벤트 처리 함수
     function count_click() {
         if (start == false && end == false) {
             setTimeout(() => {
@@ -36,11 +69,11 @@
         }
         if (start == true && end == false) {
             count++;
-            x = Math.random() * 450;
-            y = Math.random() * 450;
-            document.getElementById("target").style.left = x + "px";
-            document.getElementById("target").style.top = y + "px";
-            document.getElementById("counter").innerHTML = count;
+            x = Math.random() * randomRange;
+            y = Math.random() * randomRange;
+            targetDiv.style.left = x + "px";
+            targetDiv.style.top = y + "px";
+            document.getElementById("counter").innerHTML = count + "회";
         }
     }
 
@@ -48,12 +81,12 @@
         var time = 19;
 
         var x = setInterval(function() {
-            document.getElementById("timer").innerHTML = time;
+            document.getElementById("timer").innerHTML = time + "초";
             time--;
             console.log(time);
             if (time < 0) {
                 clearInterval(x);
-                document.getElementById("timer").innerHTML = "0";
+                document.getElementById("timer").innerHTML = "0초";
                 end = true;
             }
         }, 1000);
